@@ -6,25 +6,25 @@ import java.util.HashMap;
  * @author Danny Clyde
  */
 public class ResultTable {
-    private volatile HashMap<Integer, Integer> results;
-    private int size;
+    private volatile HashMap<Integer, Integer> _results;
+    private int _size;
 
     public ResultTable(int size) {
-        this.size = size;
-        this.results = new HashMap<Integer, Integer>(size);
+        this._size = size;
+        this._results = new HashMap<Integer, Integer>(size);
     }
 
     public synchronized void addResult(int key, int val) throws Exception {
-        if (key > this.size) {
-            throw new Exception("Got a key larger than size of result table");
+        if (key > this._size || key < 0) {
+            throw new Exception("Got a key not within size of result table");
         } else {
-            this.results.put(key, val);
+            this._results.put(key, val);
         }
     }
 
     public void printResults() {
-        for (int i = 0; i < this.size; i++) {
-            System.out.print(this.results.get(i));
+        for (int i = 0; i < this._size; i++) {
+            System.out.print(this._results.get(i));
         }
     }
 }
