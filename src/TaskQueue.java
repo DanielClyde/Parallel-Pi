@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * Shared ArrayList that handles popping elements synchronously
+ * @author Danny Clyde
+ */
 public class TaskQueue {
     private volatile ArrayList<Integer> _queue;
     private volatile int size = 0;

@@ -1,6 +1,8 @@
-import java.util.ArrayList;
-import java.util.Collections;
-
+/**
+ * Creates PiThreads based on the number of processors and has them calculate 1000
+ * digits of pi in concurrently
+ * @author Danny Clyde
+ */
 public class Assign4 {
 	public static void main(String[] args) throws InterruptedException {
 		final int NUM_DIGITS = 1000;

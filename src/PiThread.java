@@ -3,6 +3,12 @@ public class PiThread extends Thread {
     private TaskQueue _queue;
     private final int DIVISOR = 100000000;
 
+    /**
+     * Creates a designed to calculate digits of pi
+     * @param r result table shared between threads
+     * @param q task queue shared between threads
+     * @author Danny Clyde
+     */
     public PiThread(ResultTable r, TaskQueue q) {
         this._queue = q;
         this._results = r;
@@ -28,6 +34,7 @@ public class PiThread extends Thread {
      * Returns the nth digit of pi followed by the next 8 numbers
      * @param n - nth number of pi to return
      * @return returns an integer value containing 8 digits after n
+     * @author Found on github repo posted on assignment description
      */
     public int getDecimal(long n) {
         long av, a, vmax, N, num, den, k, kq, kq2, t, v, s, i;
