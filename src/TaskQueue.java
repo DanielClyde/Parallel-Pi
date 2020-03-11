@@ -1,23 +1,31 @@
-import javafx.concurrent.Task;
-
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class TaskQueue {
-    private volatile LinkedList<Integer> _queue;
+    private volatile ArrayList<Integer> _queue;
+    private volatile int size = 0;
 
-    public TaskQueue() {
-        this._queue = new LinkedList<Integer>();
-    }
-
-    public void push(int digit) {
-        this._queue.addLast(digit);
+    public TaskQueue(int size) {
+        this.size = size;
+        this._queue = new ArrayList<Integer>(size);
+        for (int i = 1; i <= size; i++) {
+            this._queue.add(i);
+        }
+        Collections.shuffle(this._queue);
     }
 
     public synchronized int pop() {
-        return this._queue.pop();
+        this.size--;
+        return this._queue.remove(0);
     }
 
-    public int getSize() {
-        return this._queue.size();
+    public synchronized int getSize() {
+        return this.size;
+    }
+
+    public void print() {
+        for (Integer i : this._queue) {
+            System.out.print(i);
+        }
     }
 }

@@ -2,21 +2,25 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Assign4 {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		final int NUM_DIGITS = 1000;
 		ResultTable results = new ResultTable(NUM_DIGITS);
-		TaskQueue queue = new TaskQueue();
-		ArrayList<Integer> list = new ArrayList<>();
-		for (int i = 1; i <= NUM_DIGITS; i++) {
-			list.add(i);
-		}
-		Collections.shuffle(list);
+		TaskQueue queue = new TaskQueue(NUM_DIGITS);
 
-		for (int i : list) {
-			queue.push(i);
+		int availableProcessors = Runtime.getRuntime().availableProcessors();
+		PiThread[] threads = new PiThread[availableProcessors];
+		long start = System.currentTimeMillis();
+		for (int i = 0; i < availableProcessors; i++) {
+			threads[i] = new PiThread(results, queue);
+			threads[i].start();
 		}
 
-		// create threads, pass in taskQueue and resultTable
-		System.out.println("Hello World!");
+		for (PiThread t : threads) {
+			t.join();
+		}
+
+		long time = System.currentTimeMillis() - start;
+		results.printResults();
+		System.out.printf("Pi computation took %d ms\n", time);
 	}
 }

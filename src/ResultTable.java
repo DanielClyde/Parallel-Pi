@@ -23,8 +23,11 @@ public class ResultTable {
     }
 
     public void printResults() {
-        for (int i = 0; i < this._size; i++) {
+        System.out.println();
+        System.out.print("3.");
+        for (int i = 1; i < this._size; i++) {
             System.out.print(this._results.get(i));
         }
+        System.out.println();
     }
 }
